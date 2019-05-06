@@ -9,7 +9,8 @@ package itsgjk.juba.util;
 
 public class Route {
 
-    public static Route GET_USER_BALANCE = new Route(Method.GET, "/guilds/{guild.id}/users/{user.id}");
+    private static String BASE_URL = "https://unbelievable.pizza/api/v1";
+    public static Route GET_USER_BALANCE = new Route(Method.GET, "/guilds/%s/users/%s");
 
     private final Method method;
     private final String url;
@@ -27,7 +28,6 @@ public class Route {
             throw new IllegalArgumentException("Given parameters couldn't satisfy the arguments of " + this);
 
         return new CompiledRoute(method, String.format(url, args));
-
     }
 
     @Override
@@ -41,7 +41,8 @@ public class Route {
         private String url;
 
         public CompiledRoute(Method method, String url){
-
+            this.method = method;
+            this.url = BASE_URL + url;
         }
 
         public Method getMethod() {

@@ -7,18 +7,41 @@ import java.util.function.Consumer;
 
 public class JUBARequest<T> {
 
-    private JUBA juba;
-    private Route route;
-    private Consumer<T> successCallback = t -> {};
-    private Consumer<? extends Throwable> errorCallback = t -> {
-        JUBA.LOGGER.error("Request returned error:");
-        t.printStackTrace();
-    };
+    JUBARestAction<T> restAction;
+    Consumer<T> onSuccess;
+    Consumer<? super Throwable> onFailure;
+    Route.CompiledRoute compiledRoute;
 
-    public JUBARequest(JUBA juba, Route route){
-        this.juba = juba;
-        this.route = route;
+    public JUBARequest(JUBARestAction<T> restAction, Consumer<T> onSuccess, Consumer<? super Throwable> onFailure, Route.CompiledRoute route) {
+        this.restAction = restAction;
+        this.onSuccess = onSuccess;
+        this.onFailure = onFailure;
+        this.compiledRoute = route;
     }
 
-    public
+    public void onSuccess(T successObj){
+        try{
+            onSuccess.accept(successObj);
+        }
+        catch(Exception ex){
+            JUBA.LOGGER.error("Error occurred when accepting success consumer", ex);
+        }
+    }
+
+    public void onFailure(Throwable exception){
+        try{
+            onFailure.accept(exception);
+        }
+        catch(Exception ex){
+            JUBA.LOGGER.error("Error occurred when accepting failure consumer", ex);
+        }
+    }
+
+    public JUBARestAction<T> getRestAction() {
+        return restAction;
+    }
+
+    public Route.CompiledRoute getRoute() {
+        return compiledRoute;
+    }
 }

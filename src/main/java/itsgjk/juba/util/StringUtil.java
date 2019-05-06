@@ -10,7 +10,7 @@ package itsgjk.juba.util;
 public class StringUtil {
 
     public static int countMatches(String input, String contained){
-        int index =input.indexOf(contained);
+        int index = input.indexOf(contained);
         int count = 0;
 
         while(index != -1){

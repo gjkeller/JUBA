@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 public class JUBA {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(JUBA.class);
-    private final String token;
     private Requester requester;
 
     public JUBA(String token){
@@ -22,8 +21,7 @@ public class JUBA {
         if(token==null || token.length() != 147)
             throw new IllegalArgumentException("Provided token was either null or not the valid length (147)");
 
-        this.token = token;
-        this.requester = new Requester();
+        this.requester = new Requester(this, token);
     }
 
     public Requester getRequester() {
