@@ -20,14 +20,41 @@ public class Route {
         this.url = url;
 
         paramCount = StringUtil.countMatches(url, "%s");
+    }
 
+    public CompiledRoute compile(String... args){
+        if(paramCount!=args.length)
+            throw new IllegalArgumentException("Given parameters couldn't satisfy the arguments of " + this);
+
+        return new CompiledRoute(method, String.format(url, args));
+
+    }
+
+    @Override
+    public String toString(){
+        return "Route(" + method + ": " + url + ")";
     }
 
     public class CompiledRoute {
 
+        private Method method;
+        private String url;
 
-        public CompiledRoute(){
+        public CompiledRoute(Method method, String url){
 
+        }
+
+        public Method getMethod() {
+            return method;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        @Override
+        public String toString(){
+            return "CompiledRoute(" + method + ": " + url + ")";
         }
     }
 }

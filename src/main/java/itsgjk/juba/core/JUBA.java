@@ -7,15 +7,15 @@
 
 package itsgjk.juba.core;
 
-import itsgjk.juba.util.QueryBuilder;
+import itsgjk.juba.requests.Requester;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JUBA {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(JUBA.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(JUBA.class);
     private final String token;
-    private QueryBuilder queryBuilder;
+    private Requester requester;
 
     public JUBA(String token){
 
@@ -23,9 +23,10 @@ public class JUBA {
             throw new IllegalArgumentException("Provided token was either null or not the valid length (147)");
 
         this.token = token;
-        queryBuilder = new QueryBuilder(this);
-
+        this.requester = new Requester();
     }
 
-    
+    public Requester getRequester() {
+        return requester;
+    }
 }
