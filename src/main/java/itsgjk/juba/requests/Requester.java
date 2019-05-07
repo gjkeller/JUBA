@@ -6,16 +6,20 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Requester {
 
     OkHttpClient client;
+    ExecutorService service;
     JUBA juba;
     private String token;
 
     public Requester(JUBA juba, String token){
         client = new OkHttpClient();
+        service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         this.juba = juba;
         this.token = token;
     }
@@ -23,15 +27,24 @@ public class Requester {
     //Sparta id 472264989793583106
     //My id 196834326963290112
 
-    public Response getResponse(Route.CompiledRoute compiledRoute){
+    public Response execute(JUBARequest<?> request){
+        Route.CompiledRoute route = request.getRoute();
+
+        Request.Builder builder = new okhttp3.Request.Builder();
+
+        builder.url(route.getUrl());
+        builder.method(route.getMethod().toString(), route.getBody());
+    }
+
+    public Response getResponseBlocking(Route.CompiledRoute compiledRoute){
         Request req = new Request.Builder()
                 .header("Authorization", token)
                 .url(compiledRoute.getUrl())
                 .build();
     }
 
-    public CompletableFuture<Response> getResponseAsync(Route.CompiledRoute compiledRoute){
-        return CompletableFuture.supplyAsync(() -> getResponse(compiledRoute));
+    public Future<Response> getResponseFuture(JUBARequest<?> request){
+        return service.submit(() -> execute(request));
     }
     //https://www.foreach.be/blog/parallel-and-asynchronous-programming-in-java-8
 }

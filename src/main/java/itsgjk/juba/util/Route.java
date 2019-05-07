@@ -7,27 +7,70 @@
 
 package itsgjk.juba.util;
 
+import okhttp3.RequestBody;
+
 public class Route {
 
+    /**
+     * User JSON object
+     *
+     * String rank?
+     * String user_id
+     * Number cash
+     * Number bank
+     * Number total
+     */
     private static String BASE_URL = "https://unbelievable.pizza/api/v1";
+    //Get user object. Infinity balance will be returned as a String, not a number
     public static Route GET_USER_BALANCE = new Route(Method.GET, "/guilds/%s/users/%s");
+    //Set balance. Number cash, Number bank, String reason expected
+    public static Route PUT_USER_BALANCE = new Route(Method.PUT, "/guilds/%s/users/%s");
+    //Change balance by number. Number cash, Number bank, String reason expected
+    public static Route PATCH_USER_BALANCE = new Route(Method.PATCH, "/guilds/%s/users/%s");
+    //Gets Array of User objects in descending order of net worth (total)
+    public static Route GET_GUILD_LEADERBOARD = new Route(Method.GET, "/guilds/%s/users");
 
     private final Method method;
+    private RequestBody body;
     private final String url;
     private int paramCount;
 
     private Route(Method method, String url){
+        this(method, url, null);
+    }
+
+    private Route(Method method, String url, RequestBody body){
         this.method = method;
+        this.body = body;
         this.url = url;
 
         paramCount = StringUtil.countMatches(url, "%s");
     }
 
+
+
     public CompiledRoute compile(String... args){
         if(paramCount!=args.length)
             throw new IllegalArgumentException("Given parameters couldn't satisfy the arguments of " + this);
 
-        return new CompiledRoute(method, String.format(url, args));
+        return new CompiledRoute(method, String.format(url, args), body);
+    }
+
+    public RequestBody getBody() {
+        return body;
+    }
+
+    /**
+     * Sets the {@link okhttp3.RequestBody} for the Route
+     *
+     * @return New {@link Route} with the {@link RequestBody}
+     */
+    public Route setBody(RequestBody body){
+        return new Route(method, url, body);
+    }
+
+    public boolean hasRequestBody(){
+        return body != null;
     }
 
     @Override
@@ -38,15 +81,21 @@ public class Route {
     public class CompiledRoute {
 
         private Method method;
+        private RequestBody body;
         private String url;
 
-        public CompiledRoute(Method method, String url){
+        public CompiledRoute(Method method, String url, RequestBody body){
             this.method = method;
+            this.body = body;
             this.url = BASE_URL + url;
         }
 
         public Method getMethod() {
             return method;
+        }
+
+        public RequestBody getBody() {
+            return body;
         }
 
         public String getUrl() {

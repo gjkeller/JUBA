@@ -31,10 +31,11 @@ public abstract class JUBARestAction<T> {
     }
 
     public void queue(Consumer<T> success, Consumer<? extends Throwable> error){
-        CompletableFuture future = juba.getRequester().getResponseAsync(route)
+        CompletableFuture future = juba.getRequester().getResponseFuture(route);
+        future.
     }
 
     public T complete(){
-        return
+
     }
 }
