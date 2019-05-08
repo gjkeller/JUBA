@@ -1,17 +1,19 @@
 package itsgjk.juba.requests;
 
+
 import itsgjk.juba.core.JUBA;
 import itsgjk.juba.util.Route;
+import okhttp3.Response;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public abstract class JUBARestAction<T> {
 
     private JUBA juba;
+    private JUBARequest<? super T> request;
     private Route.CompiledRoute route;
     private static Consumer<?> DEFAULT_SUCCESS_CALLBACK = t -> {};
-    private static Consumer<? extends Throwable> DEFAULT_ERROR_CALLBACK = t -> {
+    private static Consumer<? super Throwable> DEFAULT_ERROR_CALLBACK = t -> {
         JUBA.LOGGER.error("Request returned error:");
         t.printStackTrace();
     };
@@ -30,12 +32,13 @@ public abstract class JUBARestAction<T> {
         queue(success, DEFAULT_ERROR_CALLBACK);
     }
 
-    public void queue(Consumer<T> success, Consumer<? extends Throwable> error){
-        CompletableFuture future = juba.getRequester().getResponseFuture(route);
-        future.
+    public void queue(Consumer<T> success, Consumer<? super Throwable> failure){
+        juba.getRequester().getResponseFuture(new JUBARequest<T>(this, success, failure, route));
     }
 
     public T complete(){
-
+        return juba.getRequester().getResponseFuture(new JUBARequest<>(this, success, failure, route)).get();
     }
+
+    public abstract void handleResponse(Response response, JUBARequest<?> request);
 }

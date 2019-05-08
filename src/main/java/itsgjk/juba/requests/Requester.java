@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -27,13 +28,21 @@ public class Requester {
     //Sparta id 472264989793583106
     //My id 196834326963290112
 
-    public Response execute(JUBARequest<?> request){
+    public void execute(JUBARequest<?> request) throws IOException {
         Route.CompiledRoute route = request.getRoute();
 
         Request.Builder builder = new okhttp3.Request.Builder();
 
         builder.url(route.getUrl());
         builder.method(route.getMethod().toString(), route.getBody());
+
+        try{
+            Response r = client.newCall(builder.build()).execute();
+            request.getRestAction().handleResponse(r, request);
+        }
+        catch(IOException ex){
+            request.onFailure.accept(ex);
+        }
     }
 
     public Response getResponseBlocking(Route.CompiledRoute compiledRoute){
