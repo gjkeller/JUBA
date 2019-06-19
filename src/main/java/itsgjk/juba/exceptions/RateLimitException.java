@@ -1,6 +1,6 @@
 package itsgjk.juba.exceptions;
 
-public class RateLimitException extends Exception {
+public class RateLimitException extends RuntimeException {
 
     private long retryAfter;
 
@@ -12,7 +12,7 @@ public class RateLimitException extends Exception {
     /**
      * Number of milliseconds until this can be executed again
      *
-     * @return long of milliseconds @see <a href="https://unbelievable.pizza/api/docs">https://unbelievable.pizza/api/docs</a>
+     * @return long of milliseconds, see <a href="https://unbelievable.pizza/api/docs">https://unbelievable.pizza/api/docs</a>
      */
     public long getRetryAfter() {
         return retryAfter;

@@ -3,7 +3,7 @@ import itsgjk.juba.core.JUBA;
 public class Example {
 
     public static void main(String[] args){
-        new JUBA(args[0]);
+        JUBA juba = new JUBA(args[0]);
+        juba.modifyUserBalance("472264989793583106", "196834326963290112", 1, 0).reason("test").complete();
     }
 }
-//https://stackoverflow.com/questions/27037657/stop-intellij-idea-to-switch-java-language-level-every-time-the-pom-is-reloaded

@@ -9,6 +9,13 @@ package itsgjk.juba.util;
 
 public class Checks {
 
+    public static void isSnowflake(String id, String name){
+        notNull(id, name);
+        if(id.length() > 20||!isNumber(id)){
+            throw new IllegalArgumentException(name + " is not a valid snowflake (id)");
+        }
+    }
+
     public static void check(boolean expression, String message){
         if(!expression)
             throw new IllegalArgumentException(message);
