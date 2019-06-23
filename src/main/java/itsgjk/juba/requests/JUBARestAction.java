@@ -45,7 +45,7 @@ public abstract class JUBARestAction<T> {
         JUBA.LOG.error("RestAction returned error:", t);
     };
 
-    public static void init(){
+    static{
         service = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     }
 

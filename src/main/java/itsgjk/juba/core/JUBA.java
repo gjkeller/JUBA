@@ -48,7 +48,6 @@ public class JUBA {
 
         this.requester = new Requester(this, token);
         entityBuilder = new EntityBuilder(this);
-        JUBARestAction.init();
     }
 
     /**

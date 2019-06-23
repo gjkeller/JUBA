@@ -1,4 +1,4 @@
-# JUBA
-(Java UnbelievaBoat API) The API for popular Discord bot UnbelievaBoat!
+# JUBA (Java UnbelievaBoat API)
+The API for popular Discord bot UnbelievaBoat!
 
-(Under construction. First version of this API is not out. Contact me via Discord gabe#8005)
+![License](https://img.shields.io/github/license/ItsGJK/JUBA.svg?style=flat-square) ![Release](https://img.shields.io/github/release/ItsGJK/JUBA.svg?style=flat-square)
