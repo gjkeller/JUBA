@@ -20,9 +20,8 @@ public class Example {
 
     public static void main(String[] args){
         JUBA juba = new JUBA(args[0]);
-        juba.modifyCashBalance("472264989793583106", "196834326963290112", -1).reason("test").queue(s -> {
-            System.out.println("Done! " + s.getCashBalance() + " new cash balance.");
-            System.out.println("Rank hasn't been updated, is now " + s.getRank());
-        });
+
+        JUBA.LOG.error("gagdfg");
+        JUBA.LOG.debug("test");
     }
 }

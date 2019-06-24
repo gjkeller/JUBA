@@ -24,15 +24,15 @@ import itsgjk.juba.requests.JUBAAuditableRestAction;
 import itsgjk.juba.requests.JUBARestAction;
 import itsgjk.juba.requests.Requester;
 import itsgjk.juba.util.Checks;
+import itsgjk.juba.util.JUBALogger;
 import itsgjk.juba.util.Route;
 import okhttp3.Response;
 import org.json.JSONObject;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class JUBA {
 
-    public static final Logger LOG = LoggerFactory.getLogger(JUBA.class);
+    public static final Logger LOG = JUBALogger.getLog(JUBA.class);
     private Requester requester;
     private EntityBuilder entityBuilder;
 
