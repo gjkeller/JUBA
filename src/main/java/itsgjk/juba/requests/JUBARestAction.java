@@ -101,7 +101,7 @@ public abstract class JUBARestAction<T> {
                     }
                     catch(InterruptedException ex2){
                         //shouldn't happen?
-                        error.accept(ex2);
+                        error.accept(new RuntimeException("Unexpected error occurred during a request:" , ex2));
                         return;
                     }
                 }

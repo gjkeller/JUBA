@@ -31,7 +31,7 @@ import java.util.Date;
 public class DefaultLogger extends MarkerIgnoringBase {
 
     private static boolean INITIALIZED = false;
-    private final static LogLevel DEFAULT_LEVEL = LogLevel.DEBUG;
+    private final static LogLevel DEFAULT_LEVEL = LogLevel.INFO;
     private final static boolean SHOW_DATE_TIME = false;
     private final static boolean SHOW_THREAD = true;
     private final static String DATE_FORMAT = "yyyy-mm-dd hh:mm:ss";
@@ -50,7 +50,7 @@ public class DefaultLogger extends MarkerIgnoringBase {
     }
 
     private boolean isEnabled(LogLevel level){
-        return level.getLevelInt() <= DEFAULT_LEVEL.getLevelInt();
+        return level.getLevelInt() >= DEFAULT_LEVEL.getLevelInt();
     }
 
     public void log(LogLevel level, String message){

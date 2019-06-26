@@ -200,7 +200,7 @@ public class JUBA {
      * @param userId Discord ID of the user
      * @return JUBAUser object
      */
-    public JUBARestAction<JUBAUser> retrieveBalance(String guildId, String userId){
+    public JUBARestAction<JUBAUser> retrieveUser(String guildId, String userId){
         Checks.isSnowflake(guildId, "Guild ID");
         Checks.isSnowflake(userId, "User ID");
 
