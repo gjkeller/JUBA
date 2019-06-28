@@ -1,6 +1,6 @@
 > This readme is not complete. Links may be broken and content could be missing.
 
-[![License](https://img.shields.io/github/license/ItsGJK/JUBA.svg?style=flat-square)](https://img.shields.io/github/license/ItsGJK/JUBA.svg?style=flat-square) [![Release](https://img.shields.io/github/release/ItsGJK/JUBA.svg?style=flat-square)]((https://img.shields.io/github/release/ItsGJK/JUBA.svg?style=flat-square)) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![chat discord](https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square)](https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square)
+[![License](https://img.shields.io/github/license/ItsGJK/JUBA.svg?style=flat-square)](https://github.com/ItsGJK/JUBA/blob/v1/LICENSE) [![Release](https://img.shields.io/github/release/ItsGJK/JUBA.svg?style=flat-square)](https://github.com/ItsGJK/JUBA/releases) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![chat discord](https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square)](https://discordapp.com/invite/YMJ2dGp)
 # JUBA (Java UnbelievaBoat API)
 The Java library for popular Discord bot [UnbelievaBoat](https://unbelievaboat.com/)! UnbelievaBoat is a bot in Discord with several features, some of which relating to economies in guilds.
 
