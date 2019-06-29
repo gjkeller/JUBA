@@ -75,6 +75,7 @@ public class EntityBuilder {
 
         jubaUser.setRank(rank);
         jubaUser.setCashBalance(cash);
+        jubaUser.setBankBalance(bank);
         jubaUser.setTotalBalance(total);
 
         return jubaUser;
